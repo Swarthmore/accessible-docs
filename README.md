@@ -1,29 +1,22 @@
-# Create T3 App
+ """
+# Swarthmore A11yGator
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Welcome to the GitHub repository for Swarthmore A11yGator, an innovative platform designed to enhance the accessibility of course materials for Swarthmore College students. Our mission is to provide an inclusive learning environment by offering accessible documents, notes, and materials, catering to the diverse needs of all students.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **Accessible Course Materials**: Access a wide range of course materials that have been remediated to meet accessibility standards.
+- **Light and Dark Mode**: Customize your viewing preference with light and dark mode options for comfortable reading.
+- **Responsive Design**: Enjoy a seamless experience across various devices, ensuring that everyone can access materials anytime, anywhere.
+- **AI-Powered Search**: Utilize the advanced search functionality with AI-driven suggestions to find exactly what you need quickly.
+- **Profile Customization**: Highlight, save, and keep track of your readings and materials through a personalized profile.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Tech Stack
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- **Frontend**: Next.js for server-side rendering, React for client-side interactivity.
+- **Backend**: tRPC for type-safe API routes without schemas or code generation.
+- **Authentication**: NextAuth.js for simple and secure authentication.
+- **Database**: PostgreSQL for robust data management.
+- **Styling**: Tailwind CSS for responsive design and custom themes.
+- **Deployment**: Vercel for continuous integration and deployment.
+"""
