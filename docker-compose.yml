@@ -1,0 +1,16 @@
+version: '3.8'  # You can use any other version as needed.
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: a11ydocs-postgres
+    environment:
+      POSTGRES_PASSWORD: "secretpassword"
+      POSTGRES_DB: "a11ydocs"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
