@@ -20,3 +20,15 @@ Welcome to the GitHub repository for Swarthmore A11yGator, an innovative platfor
 - **Styling**: Tailwind CSS for responsive design and custom themes.
 - **Deployment**: Vercel for continuous integration and deployment.
 
+## Quick Start
+
+1. Clone the repo
+2. Install dependencies
+3. Copy `.env.example` to `.env`
+4. Run the database migration
+
+```
+npx prisma migrate resolve --applied 20240816170427_init
+```
+
+**You will need to make sure that the Google Oauth redirect URL is included in your Google console dashboard**
