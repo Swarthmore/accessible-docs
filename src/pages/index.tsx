@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Home from '../components/Home';
 import Login from '@mui/icons-material/Login';
 import ScrollToTopButton from '~/components/ScrollToTopButton';
+import SwarthmoreLogo from "~/assets/images/swarthmorelogo.png"
 
 const IndexPage = ({ data, selectedKey, setSelectedKey }) => {
   const { data: session } = useSession();
@@ -35,7 +36,7 @@ const IndexPage = ({ data, selectedKey, setSelectedKey }) => {
           </Button>
         </div>
 
-        <Image src="https://moodle.swarthmore.edu/pluginfile.php/1/core_admin/logocompact/300x300/1710914295/logo.png" alt="Swarthmore Logo" width={200} height={100} className="my-4" />
+        <Image src={SwarthmoreLogo} alt="Swarthmore Logo" width={200} height={100} className="my-4" />
         <div className="mt-6">
           {data.length === 0 && (
             <p className="text-xl text-white">
