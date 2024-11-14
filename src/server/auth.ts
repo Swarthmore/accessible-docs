@@ -21,6 +21,7 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: DefaultSession["user"] & {
       id: string;
+      role: string;
       // ...other properties
       // role: UserRole;
     };
@@ -58,6 +59,15 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: PrismaAdapter(db) as Adapter,
+  callbacks: {
+    async session({ session, user }) {
+      // Include the user's role in the session
+      if (session.user) {
+        session.user.role = user.role;
+      }
+      return session;
+    },
+  },
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,

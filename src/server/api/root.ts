@@ -1,6 +1,8 @@
 import { postRouter } from "~/server/api/routers/post";
 import { createTRPCRouter } from "~/server/api/trpc";
 import { pdfRouter } from "./routers/pdfRouter";
+import { fetchDataRouter } from "./routers/dataFetchRouter";
+import { storageRouter } from "./routers/storageRouter";
 /**
  * This is the primary router for your server.
  *
@@ -9,6 +11,8 @@ import { pdfRouter } from "./routers/pdfRouter";
 export const appRouter = createTRPCRouter({
   post: postRouter,
   pdf: pdfRouter,
+  fetchData: fetchDataRouter,
+  storage: storageRouter,
   
 });
 

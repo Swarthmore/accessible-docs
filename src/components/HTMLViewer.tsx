@@ -17,7 +17,7 @@ const HTMLViewer = () => {
   const contentRef = useRef(null);  // Reference to the div that holds the HTML content
   const router = useRouter();
   const { course, courseFolder, fileName } = router.query as { course: string; courseFolder?: string; fileName: string };
-  const storageUrl = 'https://pub-0005d47013ea4269a6f7ec909e1ca3ff.r2.dev';
+  const storageUrl = 'https://storage.googleapis.com/a11y';
 
   useEffect(() => {
     if (!router.isReady) return;

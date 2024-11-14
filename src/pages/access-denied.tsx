@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import AppFooter from '~/components/Footer';
 
 export default function AccessDenied() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[93.3vh] py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="p-5 bg-white shadow-lg rounded-lg ">
         <Image
-          src="https://www.swarthmore.edu/sites/default/files/styles/standard_page_header/public/assets/images/study-learning-working-living/Logo-learning-working-living_v2.png" // Placeholder image, replace with your asset
+          src="https://www.swarthmore.edu/sites/default/files/styles/standard_page_header/public/assets/images/study-learning-working-living/Logo-learning-working-living_v2.png"
           alt="Swarthmore College"
           width={400}
           height={250}
