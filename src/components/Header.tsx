@@ -125,17 +125,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
               </p>
             </div>
 
-            {/* Help Button */}
-            <Button
-              startIcon={<HelpOutlineIcon />}
-              href="https://support.swarthmore.edu/support/tickets/new?subject=[Swarthmore%20A11yGator%20Website%20Ticket]"
-              target="_blank"
-              rel="noopener noreferrer"
-              fullWidth
-              className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 rounded-md shadow transition duration-300 ease-in-out transform hover:-translate-y-1"
-            >
-              Help
-            </Button>
+
 
             {/* Logout Button */}
             <Button
