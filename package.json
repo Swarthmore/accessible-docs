@@ -1,5 +1,5 @@
 {
-  "name": "of_course",
+  "name": "a11ygator",
   "version": "0.1.0",
   "prisma": {
     "seed": "tsx prisma/seed.ts"

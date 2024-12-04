@@ -27,8 +27,10 @@ Welcome to the GitHub repository for Swarthmore A11yGator, an innovative platfor
 3. Copy `.env.example` to `.env`
 4. Run the database migration
 
-```
+```sh
 npx prisma migrate resolve --applied 20240816170427_init
 ```
+
+You can also run `docker compose up -d` to start the app in a docker container.
 
 **You will need to make sure that the Google Oauth redirect URL is included in your Google console dashboard**
