@@ -12,4 +12,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
+      env:
+        NODE_ENV: development
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        POSTGRESS_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+        NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
       run: docker compose build
