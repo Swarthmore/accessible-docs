@@ -1,29 +1,65 @@
-# Create T3 App
+# Swarthmore A11yGator
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+### **Welcome**  
+Swarthmore A11yGator is an innovative platform aimed at enhancing the accessibility of course materials for Swarthmore College students. This platform ensures an inclusive learning environment by providing remediated and accessible documents, notes, and other course materials to meet the diverse needs of students.
 
-## What's next? How do I make an app with this?
+### **Features**  
+- **Accessible Course Materials:** Access a variety of course documents, all remediated to comply with accessibility standards.  
+- **Light and Dark Mode:** Enjoy a user-friendly interface with customizable viewing preferences.  
+- **Responsive Design:** Seamlessly access materials on any device, from mobile phones to desktops.  
+- **AI-Powered Search:** Quickly find what you need using advanced AI-driven search functionality. *(Upcoming feature)*  
+- **Profile Customization:** Highlight and save readings, and personalize your material library. *(Upcoming feature)*
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+---
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+### **Tech Stack**  
+- **Frontend:**  
+  - Next.js for server-side rendering.  
+  - React for dynamic client-side functionality.  
+- **Backend:**  
+  - tRPC for type-safe API routes without schema duplication.  
+  - Prisma ORM for seamless database interaction.  
+- **Database:** PostgreSQL for reliable and efficient data storage.  
+- **Authentication:** NextAuth.js for secure and simple user authentication.  
+- **Styling:** Tailwind CSS for a clean, responsive, and accessible design.  
+- **Hosting:** Vercel for continuous integration and deployment.  
+- **Storage:** AWS S3 for document storage and management.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+---
 
-## Learn More
+### **Quick Start**  
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/Swarthmore/a11y-doc-repo.git
+   cd a11y-doc-repo
+   ```
+2. **Install Dependencies**  
+   ```bash
+   npm install
+   ```
+3. **Set Up Environment Variables**  
+   - Copy the `.env.example` file to `.env` and populate it with the required values.  
+   - Ensure you include your Google OAuth redirect URL in your Google Console dashboard.
+4. **Run Database Migration**  
+   ```bash
+   npx prisma migrate resolve --applied 20240816170427_init
+   ```
+5. **Run in Docker** (Optional)  
+   Start the app in a Docker container:  
+   ```bash
+   docker compose up -d
+   ```
+6. **Start the Development Server**  
+   ```bash
+   npm run dev
+   ```
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+---
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### **Project Goals**  
+Swarthmore A11yGator aims to:  
+- Provide a central hub for students to access accessible course materials.  
+- Ensure compliance with accessibility standards such as WCAG.  
+- Continuously improve functionality and user experience based on user feedback.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+---
