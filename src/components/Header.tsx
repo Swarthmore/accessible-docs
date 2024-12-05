@@ -16,6 +16,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'; // Import Help ic
 import Image from 'next/image';
 import SearchBarWithSuggestions from './SearchBarWithSuggestions';
 import ThemeToggle from './ThemeToggle';
+
 import useColorMode from '~/hooks/useColorMode';
 
 interface CourseItem {
@@ -51,6 +52,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
 
   return (
     <>
+
       <AppBar position="sticky" className="bg-[#b43135] dark:bg-gray-800 z-30">
         <Toolbar className="flex justify-between items-center px-4">
           {/* Swarthmore Logo */}
@@ -65,6 +67,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
               width={120}
               height={70}
             />
+
           </IconButton>
 
           {/* Search Bar */}
@@ -73,7 +76,9 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
           </div>
 
           {/* Theme Toggle */}
+
           <div className="focus:outline-red-800">
+
             <ThemeToggle colorMode={colorMode} setColorMode={setColorMode} />
           </div>
 
@@ -90,6 +95,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
               imgProps={{ referrerPolicy: 'no-referrer' }}
               style={{ width: 48, height: 48 }}
             />
+
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -142,13 +148,16 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
               startIcon={<LogoutIcon />}
               onClick={() => signOut()}
               fullWidth
+
               className="mt-4 bg-red-500 hover:bg-red-700 text-white font-medium py-2 rounded-md shadow transition duration-300 ease-in-out transform hover:-translate-y-1"
+
             >
               Logout
             </Button>
           </div>
         </>
       )}
+
 
       {/* Animation Styles */}
       <style jsx>{`
@@ -166,6 +175,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
           animation: scaleIn 0.25s ease-out forwards;
         }
       `}</style>
+
     </>
   );
 };

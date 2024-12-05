@@ -1,11 +1,11 @@
 import { type AppProps } from 'next/app';
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import theme from '../styles/theme'; 
-import Layout from '../components/Layout'; 
+import theme from '../styles/theme';
+import Layout from '../components/Layout';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import '../styles/globals.css'; 
+import '../styles/globals.css';
 import ScrollToTop from '~/components/ScrollToTop';
 import Head from 'next/head';
 import { api } from "~/utils/api";

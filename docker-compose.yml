@@ -1,0 +1,63 @@
+services:
+
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URL: $DATABASE_URL
+        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+        POSTGRES_DB: $POSTGRES_DB
+        NEXTAUTH_URL: $NEXTAUTH_URL 
+        GOOGLE_CLIENT_ID: $GOOGLE_CLIENT_ID
+        GOOGLE_CLIENT_SECRET: $GOOGLE_CLIENT_SECRET 
+        NODE_ENV: $NODE_ENV 
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: ".env"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "npx prisma generate && npx prisma migrate reset --force && npm run dev"
+    networks:
+      - a11y-network
+
+  # The only required environment variable is POSTGRES_PASSWORD.
+  # If POSTGRES_DB is not specified, it will default to the value of POSTGRES_USER.
+  # If POSTGRES_USER is not specified, it will default to postgres.
+
+  db:
+    image: postgres
+    restart: always
+    env_file: ".env"
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+    networks:
+      - a11y-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+  
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - a11y-network
+    ports:
+      - "8080:8080"
+
+networks:
+  a11y-network:
+
+# volumes:
+#   postgres_data:

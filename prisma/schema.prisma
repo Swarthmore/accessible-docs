@@ -6,6 +6,7 @@ generator client {
 }
 
 datasource db {
+  // DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
