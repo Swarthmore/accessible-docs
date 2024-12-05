@@ -12,7 +12,6 @@ export const appRouter = createTRPCRouter({
   post: postRouter,
   pdf: pdfRouter,
   fetchData: fetchDataRouter,
-  storage: storageRouter,
   
 });
 

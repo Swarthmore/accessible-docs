@@ -7,7 +7,7 @@ import { getSession } from 'next-auth/react';
 // Initialize Google Cloud Storage
 const storage = new Storage({
  projectId: 'careful-journey-435817-k2',
- keyFilename: '/Users/jeremiah/Downloads/careful-journey-435817-k2-52c8d8b8258b.json',
+ keyFilename: 'Auth/careful-journey-435817-k2-52c8d8b8258b.json',
 });
 
 
