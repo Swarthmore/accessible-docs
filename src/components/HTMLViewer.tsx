@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import cheerio from 'cheerio';
@@ -7,40 +7,43 @@ import { Typography, Breadcrumbs, Button, Box } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Link from 'next/link';
+import { api } from "~/utils/api";
 
 const HTMLViewer = () => {
+  const { mutateAsync: generatePdf, isLoading } = api.pdf.generatePdf.useMutation();
   const [content, setContent] = useState<string>('');
   const [pageTitle, setPageTitle] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
+  const contentRef = useRef(null);  // Reference to the div that holds the HTML content
   const router = useRouter();
-  const { course, courseFolder, fileName } = router.query as { course: string; courseFolder?: string; fileName: string; };
+  const { course, courseFolder, fileName } = router.query as { course: string; courseFolder?: string; fileName: string };
+  const storageUrl = 'https://storage.googleapis.com/a11y';
 
   useEffect(() => {
     if (!router.isReady) return;
-    setLoading(true); // Start loading
+    setLoading(true);
 
-    const url = courseFolder
-      ? `https://pub-0406c68e752f4eed89ba40aeef7732ed.r2.dev/${course}/${courseFolder}/${fileName}`
-      : `/data/${course}/${fileName}`;
+
+    const url = `${storageUrl}/${course}/${courseFolder}/${fileName}`;
 
     axios.get(url)
-    .then((res) => {
+      .then((res) => {
         const fetchedContent = res.data;
         const $ = cheerio.load(fetchedContent);
-    
-        // Modify each image's src attribute
+
+        // Adjust image paths
         $('img').each(function () {
             const oldSrc = $(this).attr('src');
-            const newSrc = `https://pub-0406c68e752f4eed89ba40aeef7732ed.r2.dev/${course}/${courseFolder}/${oldSrc}`;
+            const newSrc = `${storageUrl}/${course}/${courseFolder}/${oldSrc}`;
             $(this).attr('src', newSrc);
         });
-    
+
         const title = $('title').text();
         setPageTitle(title);
         $('title').remove();
         setContent($.html());
         setLoading(false);
-    })
+      })
       .catch((err) => {
         console.error(err);
         setContent('<p class="text-red-500 dark:text-red-300">Sorry, an error occurred while loading the content.</p>');
@@ -48,10 +51,24 @@ const HTMLViewer = () => {
       });
   }, [router.isReady, course, courseFolder, fileName]);
 
+  const handleDownloadPDF = async () => {
+    try {
+      const base64pdf = await generatePdf({ htmlContent: content });
+      const link = document.createElement('a');
+      link.href = `data:application/pdf;base64,${base64pdf}`;
+      link.download = `${fileName}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen dark:bg-white">
-        <div className="spinner " />
+        <div className="spinner"/>
       </div>
     );
   }
@@ -67,7 +84,7 @@ const HTMLViewer = () => {
           <a className="flex items-center dark:text-[#22d3ee] hover:text-gray-600 dark:hover:text-gray-400"><HomeIcon /></a>
         </Link>
         <Link legacyBehavior href={`/#${course}`} passHref>
-        <a className="text-blue-600 dark:text-[#22d3ee] hover:text-blue-800 dark:hover:text-blue-300">{course}</a>
+          <a className="text-blue-600 dark:text-[#22d3ee] hover:text-blue-800 dark:hover:text-blue-300">{course}</a>
         </Link>
         {courseFolder && (
           <Link legacyBehavior href={`/#${courseFolder}`} passHref>
@@ -78,17 +95,26 @@ const HTMLViewer = () => {
       </Breadcrumbs>
 
       <Box
-    dangerouslySetInnerHTML={{ __html: content }}
-    className="html-content text-gray-900 dark:text-gray-100"
-  />
+        ref={contentRef}
+        dangerouslySetInnerHTML={{ __html: content }}
+        className="html-content text-gray-900 dark:text-gray-100"
+      />
 
       <Button
         startIcon={<ArrowBackIosIcon />}
         onClick={() => router.push(`/#${courseFolder || course}`)}
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white"
+        className="mt-4 bg-blue-600 hover:bg-blue-800 text-white"
         aria-label="Go back"
       >
         Go Back
+      </Button>
+      <Button
+        onClick={handleDownloadPDF}
+        className="mt-4 ml-4 bg-green-500 hover:bg-green-700 text-white"
+        aria-label="Download as PDF"
+        disabled={isLoading}
+      >
+        Download as PDF
       </Button>
     </div>
   );

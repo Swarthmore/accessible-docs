@@ -56,22 +56,24 @@ const Sidebar = ({ data, selectedKey, setSelectedKey, collapsed, handleDrawerTog
             </IconButton>
           </Tooltip>
       </div>
-      <List>
+      <List component="div" >
         {data.map((course, index) => {
           const isSelected = selectedKey === `${index + 1}`;
           const key = `${index + 1}`;
   
           return (
             <ListItem
+              key={index}
+              // component="li"
               button
               ref={(el) => itemRefs.current[index] = el}
               onClick={() => handleListItemClick(course.name, key)}
-              className={`rounded ${isSelected ? 'bg-[#b43135]' : 'bg-transparent dark:bg-transparent'} ${isSelected ? 'text-white' : 'text-gray-700 dark:text-gray-200'} hover:bg-[#b43135] hover:text-white dark:hover:bg-slate-600 focus:ring-2 focus:ring-[#b43135] dark:focus:ring-gray-300`}
+              className={`rounded ${isSelected ? 'bg-[#b43135]' : 'bg-transparent dark:bg-transparent'} ${isSelected && 'text-white' } hover:text-white dark:text-gray-200 hover:bg-[#b43135]  dark:hover:bg-slate-600  focus:ring-2  focus:ring-[#b43135] dark:focus:ring-gray-300`}
             >
               <ListItemIcon className="min-w-0 mr-2">
-                <FolderOpenIcon className={`${isSelected ? 'text-white' : 'text-gray-700 dark:text-gray-200'}`} />
+                <FolderOpenIcon className={`${isSelected ? 'text-white' : 'text-gray-700 dark:text-gray-200'} hover:text-white`} />
               </ListItemIcon>
-              {!collapsed && <ListItemText primary={course.name} primaryTypographyProps={{ className: `${isSelected ? 'text-white' : 'text-gray-700 dark:text-gray-200'}` }} />}
+              {!collapsed && <ListItemText primary={course.name} primaryTypographyProps={{ className: `${isSelected ? 'text-white' : 'text-gray-700 dark:text-gray-200'} hover:text-white` }} />}
             </ListItem>
           );
         })}

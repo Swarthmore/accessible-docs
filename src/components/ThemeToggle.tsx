@@ -12,13 +12,20 @@ interface DarkModeToggleProps {
     const handleToggle = () => {
         setColorMode(colorMode === "light" ? "dark" : "light");
     };
+
+    const handleKeyPress = (event: React.KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        handleToggle();
+      }
+    };
+    
   return (
     <Tooltip
         title={`Switch to ${colorMode === 'light' ? 'dark' : 'light'} mode`}
         placement="bottom"
         className='z-50'
         arrow >
-    <div  >
+    <div role="button" tabIndex={0} onKeyPress={handleKeyPress}>
       <input
         type="checkbox"
         id="darkmode-toggle"

@@ -35,6 +35,7 @@ const Layout = ({ children, data, selectedKey, setSelectedKey, setCollapsed, col
 
   return (
     <Box display="flex" className='dark:bg-black' >
+      <Box component="nav" className={`flex-shrink-0 dark:bg-black`}>
       <Sidebar
         data={data}
         selectedKey={selectedKey}
@@ -43,6 +44,7 @@ const Layout = ({ children, data, selectedKey, setSelectedKey, setCollapsed, col
         handleDrawerToggle={() => setCollapsed((prev) => !prev)}
         drawerWidth={240}
       />
+      </Box>
       <Box component="main" className={`flex-grow dark:bg-black ${collapsed ? 'ml-0' : 'ml-[240px]'}`}>
         <AppHeader onSearch={() => {}} jsonData={data} />
         {children}

@@ -1,5 +1,5 @@
-import { AppProps } from 'next/app';
-import { SessionProvider } from 'next-auth/react';
+import { type AppProps } from 'next/app';
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from '../styles/theme';
 import Layout from '../components/Layout';
@@ -7,24 +7,27 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import '../styles/globals.css';
 import ScrollToTop from '~/components/ScrollToTop';
-import AppFooter from '~/components/Footer';
 import Head from 'next/head';
+import { api } from "~/utils/api";
 
 const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   const [data, setData] = useState([]);
   const [selectedKey, setSelectedKey] = useState('1');
   const [collapsed, setCollapsed] = useState(false);
+  const storageUrl = 'https://storage.googleapis.com/a11y';
+  const dataUrl = `${storageUrl}/data.json`;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/data.json');
+        // Add a cache-busting query parameter
+        const timestamp = new Date().getTime();
+        const response = await axios.get(`${dataUrl}?timestamp=${timestamp}`);
         setData(response.data.children);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
     };
-
     fetchData();
   }, [  ]);
 
@@ -49,5 +52,4 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps) =>
     </SessionProvider>
   );
 };
-
-export default MyApp;
+export default api.withTRPC(MyApp);

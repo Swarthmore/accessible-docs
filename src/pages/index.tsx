@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Tooltip , IconButton} from '@mui/material';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 import Image from 'next/image';
 import Home from '../components/Home';
 import Login from '@mui/icons-material/Login';
@@ -8,6 +10,19 @@ import ScrollToTopButton from '~/components/ScrollToTopButton';
 import SwarthmoreLogo from "~/assets/images/swarthmorelogo.png"
 
 const IndexPage = ({ data, selectedKey, setSelectedKey }) => {
+
+  const [videoPlaying, setVideoPlaying] = useState(false);
+
+  const toggleVideoPlay = () => {
+    const video = document.getElementById('backgroundVideo');
+    if (videoPlaying) {
+      video.pause();
+    } else {
+      video.play();
+    }
+    setVideoPlaying(!videoPlaying);
+  };
+
   const { data: session } = useSession();
 
   if (session) {
@@ -21,11 +36,20 @@ const IndexPage = ({ data, selectedKey, setSelectedKey }) => {
 
   return (
     <div className="relative min-h-[93.3vh] overflow-hidden">
-      <video autoPlay muted loop className="absolute z-0 w-auto min-w-full min-h-full max-w-none">
+      <video id="backgroundVideo" loop className="absolute z-0 w-auto min-w-full min-h-full max-w-none" muted>
         <source src="/swarthmore.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[93.3vh] bg-black bg-opacity-50">
+        <Tooltip title={videoPlaying ? "Pause background video" : "Play background video"} placement="top">
+          <IconButton
+            color="primary"
+            aria-label={videoPlaying ? "Pause background video" : "Play background video"}
+            onClick={toggleVideoPlay}
+            className="absolute top-5 right-5 z-20 text-white">
+            {videoPlaying ? <PauseIcon fontSize="large" /> : <PlayArrowIcon fontSize="large" />}
+          </IconButton>
+        </Tooltip>
         <div className="text-center p-4">
           <h1 className="text-4xl font-bold text-white mb-4">Welcome to Swarthmore A11yGator</h1>
           <p className="text-white mb-4">Your hub for accessing remediated, accessible course documents at Swarthmore College.</p>
