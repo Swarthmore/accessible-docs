@@ -8,15 +8,24 @@ services:
         DATABASE_URL: $DATABASE_URL
         POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         POSTGRES_DB: $POSTGRES_DB
-        NEXTAUTH_URL: $NEXTAUTH_URL 
+        NEXTAUTH_URL: $NEXTAUTH_URL
         GOOGLE_CLIENT_ID: $GOOGLE_CLIENT_ID
-        GOOGLE_CLIENT_SECRET: $GOOGLE_CLIENT_SECRET 
-        NODE_ENV: $NODE_ENV 
+        GOOGLE_CLIENT_SECRET: $GOOGLE_CLIENT_SECRET
+        NODE_ENV: $NODE_ENV
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      # Runtime environment variables
+      NODE_ENV: $NODE_ENV
+      DATABASE_URL: $DATABASE_URL
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      NEXTAUTH_URL: $NEXTAUTH_URL
+      NEXTAUTH_SECRET: $NEXTAUTH_SECRET
+      GOOGLE_CLIENT_ID: $GOOGLE_CLIENT_ID
+      GOOGLE_CLIENT_SECRET: $GOOGLE_CLIENT_SECRET
     env_file: ".env"
     volumes:
       - .:/app
@@ -40,11 +49,11 @@ services:
     networks:
       - a11y-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 1s
       timeout: 5s
       retries: 10
-  
+
   adminer:
     image: adminer
     restart: always
@@ -59,5 +68,5 @@ services:
 networks:
   a11y-network:
 
-# volumes:
-#   postgres_data:
+    # volumes:
+    #   postgres_data:
