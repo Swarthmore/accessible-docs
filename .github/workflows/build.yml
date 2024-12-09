@@ -12,4 +12,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker compose build -e NODE_ENV="development" -e DATABASE_URL=${{ secrets.DATABASE_URL }} -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} -e NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} -e GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
+      run: |
+        docker compose build \
+          --build-arg NODE_ENV="development" \
+          --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
+          --build-arg POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+          --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
+          --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
+          --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
+          --build-arg GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
