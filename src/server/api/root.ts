@@ -10,9 +10,7 @@ import { fetchDataRouter } from "./routers/dataFetchRouter";
 export const appRouter = createTRPCRouter({
   post: postRouter,
   pdf: pdfRouter,
-  fetchData: fetchDataRouter,
-  storage: storageRouter,
-  
+  fetchData: fetchDataRouter
 });
 
 // export type definition of API
