@@ -9,6 +9,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Link from 'next/link';
 import { api } from "~/utils/api";
 
+const STORAGE_URL = 'https://storage.googleapis.com/a11y';
+
 const HTMLViewer = () => {
 
   const { mutateAsync: generatePdf, isLoading } = api.pdf.generatePdf.useMutation();
@@ -18,39 +20,57 @@ const HTMLViewer = () => {
   const contentRef = useRef(null);  // Reference to the div that holds the HTML content
   const router = useRouter();
   const { course, courseFolder, fileName } = router.query as { course: string; courseFolder?: string; fileName: string };
-  const storageUrl = 'https://storage.googleapis.com/a11y';
 
   useEffect(() => {
+
     if (!router.isReady) return;
-    setLoading(true);
 
+    const constructUrl = () => {
+      let url = `${STORAGE_URL}/${course}/${fileName}`;
+      if (courseFolder) {
+        url = `${STORAGE_URL}/${course}/${courseFolder}/${fileName}`;
+      }
 
-    const url = `${storageUrl}/${course}/${courseFolder}/${fileName}`;
+      return url;
+    };
 
-    // console.info('Fetching content from:', url);
+    const fetchContent = async () => {
+      const url = constructUrl();
+      const { data, status } = await axios.get<string>(url)
+      if (status !== 200) {
+        throw new Error('Failed to fetch content');
+      }
+      return data
+    }
 
-    axios.get(url)
-      .then((res) => {
-        const fetchedContent = res.data;
-        const $ = cheerio.load(fetchedContent);
+    (async () => {
+      try {
+        setLoading(true);
+
+        const data = await fetchContent()
+        const $ = cheerio.load(data);
 
         // Adjust image paths
         $('img').each(function () {
-            const oldSrc = $(this).attr('src');
-            const newSrc = `${storageUrl}/${course}/${courseFolder}/${oldSrc}`;
-            $(this).attr('src', newSrc);
+          const oldSrc = $(this).attr('src');
+          const newSrc = `${STORAGE_URL}/${course}/${courseFolder}/${oldSrc}`;
+          $(this).attr('src', newSrc);
         });
+
         const title = $('title').text();
         setPageTitle(title);
         $('title').remove();
         setContent($.html());
+      } catch (error) {
+        throw new Error(typeof error === 'string' ? error : 'Failed to fetch content');
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setContent('<p class="text-red-500 dark:text-red-300">Sorry, an error occurred while loading the content.</p>');
-        setLoading(false); 
-      });
+      }
+
+    })().catch((error) => {
+      console.error('Error fetching content:', error);
+    });
+
   }, [router.isReady, course, courseFolder, fileName]);
 
   const handleDownloadPDF = async () => {
@@ -70,7 +90,7 @@ const HTMLViewer = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen dark:bg-white">
-        <div className="spinner"/>
+        <div className="spinner" />
       </div>
     );
   }
@@ -104,7 +124,7 @@ const HTMLViewer = () => {
 
       <Button
         startIcon={<ArrowBackIosIcon />}
-        onClick={() => router.push(`/#${courseFolder || course}`)}
+        onClick={() => router.push(`/#${courseFolder ?? course}`)}
         className="mt-4 bg-blue-600 hover:bg-blue-800 text-white"
         aria-label="Go back"
       >
