@@ -32,10 +32,6 @@ services:
       - /app/node_modules
     command: sh -c "npx prisma generate && npx prisma migrate reset --force && npm run dev"
 
-  # The only required environment variable is POSTGRES_PASSWORD.
-  # If POSTGRES_DB is not specified, it will default to the value of POSTGRES_USER.
-  # If POSTGRES_USER is not specified, it will default to postgres.
-
   db:
     image: mysql
     restart: always
