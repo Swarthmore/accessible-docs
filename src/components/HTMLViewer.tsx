@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import Head from 'next/head';
 import { Typography, Breadcrumbs, Button, Box } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { api } from "~/utils/api";
 
 const HTMLViewer = () => {
+
   const { mutateAsync: generatePdf, isLoading } = api.pdf.generatePdf.useMutation();
   const [content, setContent] = useState<string>('');
   const [pageTitle, setPageTitle] = useState<string>('');
@@ -26,6 +27,8 @@ const HTMLViewer = () => {
 
     const url = `${storageUrl}/${course}/${courseFolder}/${fileName}`;
 
+    // console.info('Fetching content from:', url);
+
     axios.get(url)
       .then((res) => {
         const fetchedContent = res.data;
@@ -37,7 +40,6 @@ const HTMLViewer = () => {
             const newSrc = `${storageUrl}/${course}/${courseFolder}/${oldSrc}`;
             $(this).attr('src', newSrc);
         });
-
         const title = $('title').text();
         setPageTitle(title);
         $('title').remove();
