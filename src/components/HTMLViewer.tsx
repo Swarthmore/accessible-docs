@@ -98,7 +98,7 @@ const HTMLViewer = () => {
   return (
     <div className="p-8 bg-slate-50 dark:bg-slate-800 border border-gray-400 dark:border-gray-600 shadow-2xl m-8 rounded-lg" tabIndex={0} aria-label="HTML content viewer">
       <Head>
-        <title>{pageTitle}</title>
+        <title>Accessible Docs :: {pageTitle} :: Swarthmore</title>
       </Head>
 
       <Breadcrumbs aria-label="breadcrumb" className="mb-4 text-gray-800 dark:text-gray-200">
