@@ -7,8 +7,7 @@ import {
   Toolbar,
   IconButton,
   Avatar,
-  Button,
-  Tooltip,
+  Button
 } from '@mui/material';
 import { useSession, signOut } from 'next-auth/react';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -21,7 +20,7 @@ import useColorMode from '~/hooks/useColorMode';
 
 interface CourseItem {
   name: string;
-  type: 'course' | 'coursefolder';
+  type: 'course' | 'coursefolder'
   children?: CourseItem[];
 }
 

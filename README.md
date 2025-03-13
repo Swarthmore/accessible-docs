@@ -4,6 +4,11 @@
 
 **Accessible Docs** is an innovative platform aimed at enhancing the accessibility of course materials for Swarthmore College students. This platform ensures an inclusive learning environment by providing remediated and accessible documents, notes, and other course materials to meet the diverse needs of students.
 
+## What's in this Repo?
+
+The **Accessible Docs** app is in the [webapp](webapp/) folder.
+The scripts folder contains [Python scripts](scripts/) used to prepare the data for the webapp.
+
 ## Project Goals
 
 **Accessible Docs** aims to:  
