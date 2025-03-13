@@ -41,8 +41,8 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ account, profile }) {
-      if (account.provider === "google") {
-        if (profile.email_verified && profile.email.endsWith("@swarthmore.edu")) {
+      if (account?.provider === "google") {
+        if (profile?.email?.endsWith("@swarthmore.edu")) {
           return true; // Allow login
         } else {
           return '/access-denied'; 
@@ -72,6 +72,7 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true
     }),
     /**
      * ...add more providers here.

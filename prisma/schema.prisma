@@ -6,9 +6,9 @@ generator client {
 }
 
 datasource db {
-  // DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // DB_URL -> protocol//[hosts][/database][?properties]
+  provider = "mysql"
+  url      = env("DB_URL")
 }
 
 enum Role {
@@ -23,12 +23,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?
-  access_token      String?
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String? @db.Text
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -37,26 +37,26 @@ model Account {
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique
+  sessionToken String   @unique @db.VarChar(256)
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?  @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
-  role          Role     @default(USER)
+  role          Role      @default(USER)
   accounts      Account[]
   sessions      Session[]
 }
 
 model VerificationToken {
   identifier String
-  token      String   @unique
+  token      String   @unique @db.VarChar(256)
   expires    DateTime
 
   @@unique([identifier, token])
