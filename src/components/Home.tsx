@@ -46,7 +46,7 @@ useEffect(() => {
   return (
     <div className="p-5 dark:bg-black">
       {data.length !== 0 && (
-        <h1 className="text-center text-2xl font-bold mb-10 dark:text-white">Welcome to the Swarthmore A11yGator!</h1>
+        <h1 className="text-center text-2xl font-bold mb-10 dark:text-white">Welcome to the <strong>Accessible Docs</strong></h1>
       )}
   
       {data.length !== 0 && (
