@@ -13,12 +13,13 @@ const IndexPage = ({ data, selectedKey, setSelectedKey }) => {
 
   const [videoPlaying, setVideoPlaying] = useState(false);
 
-  const toggleVideoPlay = () => {
-    const video = document.getElementById('backgroundVideo');
+  const toggleVideoPlay = async () => {
+    const video = document.getElementById('backgroundVideo') as HTMLVideoElement;
+    if (!video) return
     if (videoPlaying) {
       video.pause();
     } else {
-      video.play();
+      await video.play();
     }
     setVideoPlaying(!videoPlaying);
   };
