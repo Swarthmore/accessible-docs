@@ -1,2 +1,4 @@
 webapp/node_modules
 webapp/.next
+.github/.DS_Store
+.gitignore
