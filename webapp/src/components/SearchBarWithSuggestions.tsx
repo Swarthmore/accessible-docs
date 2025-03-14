@@ -80,7 +80,7 @@ const SearchBarWithSuggestions: React.FC<SearchBarWithSuggestionsProps> = ({ jso
     onKeyDown={(e) => e.key === 'Enter' && handleSearchButtonClick()}
     onBlur={handleBlur}
     onFocus={() => setShowSuggestions(true)}
-    className="rounded-lg shadow"
+    className="rounded-lg shadow-sm"
     InputProps={{
       className: "bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200",
       endAdornment: (

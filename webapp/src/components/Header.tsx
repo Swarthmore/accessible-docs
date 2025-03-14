@@ -56,7 +56,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
         <Toolbar className="flex justify-between items-center px-4">
           {/* Swarthmore Logo */}
           <IconButton
-            className="focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 rounded-none"
+            className="focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 rounded-none"
             onClick={() => router.push('/')}
             aria-label="home"
           >
@@ -70,7 +70,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
           </IconButton>
 
           {/* Search Bar */}
-          <div className="flex-grow mx-auto max-w-xl">
+          <div className="grow mx-auto max-w-xl">
             <SearchBarWithSuggestions jsonData={jsonData} onSearch={onSearch} />
           </div>
 
@@ -83,7 +83,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
 
           {/* Profile Icon */}
           <IconButton
-            className="focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300"
+            className="focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300"
             onClick={() => setModalOpen(!modalOpen)}
             aria-label="profile"
             ref={avatarRef}
@@ -137,7 +137,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
              target="_blank"
              rel="noopener noreferrer"
              fullWidth
-             className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 rounded-md shadow transition duration-300 ease-in-out transform hover:-translate-y-1"
+             className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 rounded-md shadow-sm transition duration-300 ease-in-out transform hover:-translate-y-1"
            >
              Help
            </Button>
@@ -148,7 +148,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
               onClick={() => signOut()}
               fullWidth
 
-              className="mt-4 bg-red-500 hover:bg-red-700 text-white font-medium py-2 rounded-md shadow transition duration-300 ease-in-out transform hover:-translate-y-1"
+              className="mt-4 bg-red-500 hover:bg-red-700 text-white font-medium py-2 rounded-md shadow-sm transition duration-300 ease-in-out transform hover:-translate-y-1"
 
             >
               Logout

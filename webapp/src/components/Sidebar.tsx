@@ -68,7 +68,7 @@ const Sidebar = ({ data, selectedKey, setSelectedKey, collapsed, handleDrawerTog
               button
               ref={(el) => itemRefs.current[index] = el}
               onClick={() => handleListItemClick(course.name, key)}
-              className={`rounded ${isSelected ? 'bg-[#b43135]' : 'bg-transparent dark:bg-transparent'} ${isSelected && 'text-white' } hover:text-white dark:text-gray-200 hover:bg-[#b43135]  dark:hover:bg-slate-600  focus:ring-2  focus:ring-[#b43135] dark:focus:ring-gray-300`}
+              className={`rounded-sm ${isSelected ? 'bg-[#b43135]' : 'bg-transparent dark:bg-transparent'} ${isSelected && 'text-white' } hover:text-white dark:text-gray-200 hover:bg-[#b43135]  dark:hover:bg-slate-600  focus:ring-2  focus:ring-[#b43135] dark:focus:ring-gray-300`}
             >
               <ListItemIcon className="min-w-0 mr-2">
                 <FolderOpenIcon className={`${isSelected ? 'text-white' : 'text-gray-700 dark:text-gray-200'} hover:text-white`} />
