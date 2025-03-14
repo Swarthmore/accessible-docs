@@ -4,6 +4,7 @@ import { Box, CircularProgress } from '@mui/material';
 import AppHeader from './Header';
 import Sidebar from './Sidebar';
 import AppFooter from './Footer';
+import { cn } from '~/utils/cn';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -34,7 +35,7 @@ const Layout = ({ children, data, selectedKey, setSelectedKey, setCollapsed, col
   }
 
   return (
-    <Box display="flex" className='dark:bg-black' >
+    <div className={cn(['flex', 'flex-col', 'h-screen', 'max-h-screen', 'max-w-screen', 'w-screen'])}>
       <Box component="nav" className={`flex-shrink-0 dark:bg-black`}>
       <Sidebar
         data={data}
@@ -50,7 +51,7 @@ const Layout = ({ children, data, selectedKey, setSelectedKey, setCollapsed, col
         {children}
         <AppFooter />
       </Box>
-    </Box>
+    </div>
   );
 };
 
