@@ -16,9 +16,10 @@ jobs:
           cd webapp && \
           docker compose build \
             --no-cache \
-            --build-arg NODE_ENV="development" \
-            --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
-            --build-arg POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+            --build-arg NODE_ENV="production" \
+            --build-arg DB_URL=${{ secrets.DB_URL }} \
+            --build-arg DB_PASS=${{ secrets.DB_PASS }} \
+            --build-arg DB_NAME=${{ secrets.DB_NAME }} \
             --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} \
             --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
             --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
