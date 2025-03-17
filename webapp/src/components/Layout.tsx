@@ -36,7 +36,7 @@ const Layout = ({ children, data, selectedKey, setSelectedKey, setCollapsed, col
 
   return (
     <div className={cn(['flex', 'flex-col', 'h-screen', 'max-h-screen', 'max-w-screen', 'w-screen'])}>
-      <Box component="nav" className={`flex-shrink-0 dark:bg-black`}>
+      <Box component="nav" className={`shrink-0 dark:bg-black`}>
       <Sidebar
         data={data}
         selectedKey={selectedKey}
@@ -46,7 +46,7 @@ const Layout = ({ children, data, selectedKey, setSelectedKey, setCollapsed, col
         drawerWidth={240}
       />
       </Box>
-      <Box component="main" className={`flex-grow dark:bg-black ${collapsed ? 'ml-0' : 'ml-[240px]'}`}>
+      <Box component="main" className={`grow dark:bg-black ${collapsed ? 'ml-0' : 'ml-[240px]'}`}>
         <AppHeader onSearch={() => {}} jsonData={data} />
         {children}
         <AppFooter />
