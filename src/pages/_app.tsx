@@ -44,7 +44,7 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps) =>
           collapsed={collapsed}
         >
           <Head>
-            <title>Swarthmore A11yGator</title>
+            <title>AccessibleDocs :: Swarthmore College</title>
           </Head>
           <Component {...pageProps} data={data} selectedKey={selectedKey} setSelectedKey={setSelectedKey} setCollapsed={setCollapsed} />
         </Layout>

@@ -42,6 +42,13 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model ChiAurora {
+  id           String   @id @default(cuid())
+  crush String   @unique
+  userId       String
+  expires      DateTime
+}
+
 model User {
   id            String   @id @default(cuid())
   name          String?

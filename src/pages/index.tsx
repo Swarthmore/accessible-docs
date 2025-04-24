@@ -59,14 +59,14 @@ const IndexPage = ({ data, selectedKey, setSelectedKey }) => {
           </Button>
         </div>
 
-        <Image src="https://moodle.swarthmore.edu/pluginfile.php/1/core_admin/logocompact/300x300/1710914295/logo.png" alt="Swarthmore Logo" width={200} height={100} className="my-4" />
-        <div className="mt-6">
+        <Image src="/swarthmore-logo-no-bg.png" alt="Swarthmore Logo" width={200} height={100} className="my-4" />
+        {/* <div className="mt-6">
           {data.length === 0 && (
             <p className="text-xl text-white">
               No course documents available at the moment.
             </p>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

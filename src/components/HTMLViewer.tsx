@@ -83,11 +83,11 @@ const HTMLViewer = () => {
         <Link legacyBehavior href="/" passHref>
           <a className="flex items-center dark:text-[#22d3ee] hover:text-gray-600 dark:hover:text-gray-400"><HomeIcon /></a>
         </Link>
-        <Link legacyBehavior href={`/#${course}`} passHref>
+        <Link legacyBehavior href={`/${course}`} passHref>
           <a className="text-blue-600 dark:text-[#22d3ee] hover:text-blue-800 dark:hover:text-blue-300">{course}</a>
         </Link>
         {courseFolder && (
-          <Link legacyBehavior href={`/#${courseFolder}`} passHref>
+          <Link legacyBehavior href={`/${course}/#${courseFolder}`} passHref>
             <a className="text-blue-600 dark:text-[#22d3ee] hover:text-blue-800 dark:hover:text-blue-300">{courseFolder}</a>
           </Link>
         )}

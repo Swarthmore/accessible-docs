@@ -27,10 +27,10 @@ declare module "next-auth" {
     };
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    // ...other properties
+    role: string;
+  }
 }
 
 /**
@@ -41,33 +41,22 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ account, profile }) {
-      if (account.provider === "google") {
-        if (profile.email_verified && profile.email.endsWith("@swarthmore.edu")) {
-          return true; // Allow login
-        } else {
-          return '/access-denied'; 
-        }
+      if (account?.provider === "google") {
+        return profile?.email_verified && 
+               profile?.email?.endsWith("@swarthmore.edu") ? 
+               true : '/access-denied';
       }
-      return true; 
+      return true;
     },
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-  },
-  adapter: PrismaAdapter(db) as Adapter,
-  callbacks: {
     async session({ session, user }) {
-      // Include the user's role in the session
       if (session.user) {
-        session.user.role = user.role;
+        session.user.id = user.id;
+        session.user.role = user.role || "user"; // Default to "user" if role is undefined
       }
       return session;
     },
   },
+  adapter: PrismaAdapter(db) as Adapter,
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
@@ -76,10 +65,7 @@ export const authOptions: NextAuthOptions = {
     /**
      * ...add more providers here.
      *
-     * Most other providers require a bit more work than the GOOGLE provider. For example, the
-     * GOOGLE provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
+     * Most other providers require a bit more work than the Google provider.
      * @see https://next-auth.js.org/providers/google
      */
   ],

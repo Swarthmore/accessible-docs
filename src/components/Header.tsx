@@ -17,6 +17,7 @@ import Image from 'next/image';
 import SearchBarWithSuggestions from './SearchBarWithSuggestions';
 import ThemeToggle from './ThemeToggle';
 import useColorMode from '~/hooks/useColorMode';
+import AdvancedSearch from './AdvancedSearch';
 
 interface CourseItem {
   name: string;
@@ -69,7 +70,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ onSearch, jsonData }) => {
 
           {/* Search Bar */}
           <div className="flex-grow mx-auto max-w-xl">
-            <SearchBarWithSuggestions jsonData={jsonData} onSearch={onSearch} />
+            <AdvancedSearch></AdvancedSearch>
           </div>
 
           {/* Theme Toggle */}
