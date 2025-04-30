@@ -30,6 +30,11 @@ export const env = createEnv({
     ),
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
+    // Typesense environment variables
+    TYPESENSE_HOST: z.string(),
+    TYPESENSE_PORT: z.coerce.number(),
+    TYPESENSE_PROTOCOL: z.string(),
+    TYPESENSE_API_KEY: z.string(),
   },
 
   /**
@@ -52,6 +57,10 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    TYPESENSE_HOST: process.env.TYPESENSE_HOST,
+    TYPESENSE_PORT: process.env.TYPESENSE_PORT,
+    TYPESENSE_PROTOCOL: process.env.TYPESENSE_PROTOCOL,
+    TYPESENSE_API_KEY: process.env.TYPESENSE_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

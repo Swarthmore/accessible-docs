@@ -2,15 +2,16 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { Client } from "typesense";
+import { env } from "~/env";
 
-// Create Typesense client
+// Typesense client
 const typesense = new Client({
   nodes: [{ 
-    host: 'q8joz0kp2hix69esp-1.a1.typesense.net', 
-    port: '443', 
-    protocol: 'https' 
+    host: env.TYPESENSE_HOST, 
+    port: env.TYPESENSE_PORT, 
+    protocol: env.TYPESENSE_PROTOCOL 
   }],
-  apiKey: 'GUAbBTuteJRVjAjiknBibPzD9iFCb72s',  // Search Only API Key
+  apiKey: env.TYPESENSE_API_KEY,
   connectionTimeoutSeconds: 5
 });
 

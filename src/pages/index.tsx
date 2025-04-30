@@ -34,12 +34,12 @@ const IndexPage = ({ data, selectedKey, setSelectedKey }) => {
   }
 
   return (
-    <div className="relative min-h-[93.3vh] overflow-hidden">
+    <div className="relative min-h-[94vh] overflow-hidden">
       <video id="backgroundVideo" loop className="absolute z-0 w-auto min-w-full min-h-full max-w-none" muted>
         <source src="/swarthmore.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[93.3vh] bg-black bg-opacity-50">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[94vh] bg-black bg-opacity-50">
         <Tooltip title={videoPlaying ? "Pause background video" : "Play background video"} placement="top">
           <IconButton
             color="primary"
